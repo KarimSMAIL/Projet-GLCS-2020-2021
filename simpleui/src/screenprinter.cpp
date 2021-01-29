@@ -1,22 +1,24 @@
 // standard C++ library headers
+//#include <hdf5.h>
 #include <chrono>
 #include <iostream>
 #include <thread>
-
 // the implemented class (last)
 #include "screenprinter.hpp"
 
 using std::cout;
 using std::endl;
-using std::flush;
+using std::flush;//
 using std::this_thread::sleep_for;
 using std::chrono::milliseconds;
 
 void ScreenPrinter::simulation_updated( const Distributed2DField& data )
 {
+	//hid_t file_id = H5Fcreate("file.h5", H5F_ACC_TRUNC,H5P_DEFAULT, H5P_DEFAULT);
 	if ( data.distribution().rank() == 0 ) {
 		cout << "at t="<<data.time()<<" : [" << endl;
 	}
+	
 	cout<<flush; 
 	MPI_Barrier(data.distribution().communicator());
 	sleep_for(milliseconds(1));
@@ -27,6 +29,7 @@ void ScreenPrinter::simulation_updated( const Distributed2DField& data )
 					if ( pxx == 0 ) {
 						cout << "  [";
 					}
+					
 					for ( int xx = 0; xx < data.noghost_view().extent( DX ); ++xx ) {
 						if ( 0 == data.noghost_view(yy, xx) ) {
 							cout << " .";

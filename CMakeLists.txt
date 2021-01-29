@@ -8,6 +8,7 @@ add_subdirectory("vendor/mdspan/" "mdspan" EXCLUDE_FROM_ALL)
 add_subdirectory(baselib)
 add_subdirectory(heatlib)
 add_subdirectory(simpleui)
+add_subdirectory(boost)
 
 add_executable(simpleheat
 		simpleheat.cpp
@@ -16,4 +17,5 @@ target_link_libraries(simpleheat PRIVATE
 		GLCS2020_project::baselib
 		GLCS2020_project::heatlib
 		GLCS2020_project::simpleui
+		GLCS2020_project::boost
 		MPI::MPI_CXX)

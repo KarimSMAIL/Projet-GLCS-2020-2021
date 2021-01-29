@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.18)
 
 add_library(simpleui
-		src/commandlineconfig.cpp
+		src/configuration.cpp
 		src/screenprinter.cpp
 )
 target_include_directories(simpleui PUBLIC include/)
